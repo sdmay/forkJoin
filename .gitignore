@@ -8,7 +8,7 @@
 
 # dependencies
 /node_modules
-
+/AppData
 # IDEs and editors
 /.idea
 .project
