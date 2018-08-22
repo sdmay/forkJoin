@@ -34,6 +34,6 @@ app.get('/api/users/:id', (req, res) => {
     res.send({first_name: name});
 });
 app.listen(3000, () => {
-    console.log('listentig');
+    console.log('Listening');
 });
 export default app;
