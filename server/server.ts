@@ -62,13 +62,13 @@ app.get('/api/rating/:car/:source', (req, res) => {
         if (req.params.source === 'cnn') {
             res.send({car: req.params.car,
                 source: 'cnn',
-                rating: 3
+                rating: 3000
                 });
         }
         if (req.params.source === 'fox') {
             res.send({car: req.params.car,
                 source: 'fox',
-                rating: 5
+                rating: 8000
                 });
         }
         if (req.params.source === 'forbes') {
@@ -101,10 +101,10 @@ app.get('/api/rating/:car/:source', (req, res) => {
 
 });
 app.get('/api/libra', (req, res) => {
-    res.send({horo: ' LIBRAS are the best, arent we!!!!'});
+    res.send({newsSource: ' LIBRAS are the best, arent we!!!!'});
 });
 app.get('/api/not-libra', (req, res) => {
-    res.send({horo: 'HA HA HA You are not a libra!'});
+    res.send({newsSource: 'HA HA HA You are not a libra!'});
 });
 app.get('/api/users/:id', (req, res) => {
     let name = '';

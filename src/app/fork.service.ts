@@ -10,24 +10,17 @@ export class ForkService {
 combined;
 together = [];
   constructor(private http: HttpClient) { }
-  combineInfo(x): Observable<Array<any>>   {
-    console.log(x[0][0].length);
-    const carTypes = x[0][0];
-    const source = x[0][1];
-    // console.log(z[0], z[1], z[2]);
+  combineInfo(infoValues): Observable<Array<any>>   {
+    const carTypes = infoValues[0][0];
+    const source = infoValues[0][1];
     for (let i = 0; i < carTypes.length; i++) {
       for (let j = 0; j < source.length; j++) {
-          console.log(source[j]);
           this.together.push(`/api/rating/${carTypes[i]}/${source[j]}`);
       }
     }
-    console.log(this.together);
-    const singleObservables = this.together.map((singleUrl: string, urlIndex: number) => {
+    const singleObservables = this.together.map((singleUrl: string, urlIndeinfoValues: number) => {
       return this.getSingle(singleUrl)
-          .map(p => {
-            console.log(p as Array<any>);
-            return p as Array<any>;
-          });
+          .map(p => p);
           // .catch((error: any) => {
           //     console.error('Error loading Single, singleUrl: ' + singleUrl, 'Error: ', error);
           //     return Observable.of(null); // In case error occurs, we need to return Observable, so the stream can continue
@@ -36,35 +29,14 @@ together = [];
 
   return forkJoin(singleObservables);
   }
-    // console.log(this.combined);
-    getSingle(singleUrl: string): Observable<any> {
-      return this.http.get(singleUrl)
-          .map((r: Response) => r);
-
-  }
-getNews(...x): Observable<any> {
-
-  return this.http.get(`/api/rating/${x[2]}/forbes`);
+  getSingle(singleUrl: string): Observable<any> {
+  return this.http.get(singleUrl)
+      .map((r: Response) => r);
 }
-  getInfo(userid, postorcomment): Observable<any> {
-    console.log(userid);
-    if (postorcomment === 'posts') {
-      return this.http.get(`https://jsonplaceholder.typicode.com/${postorcomment}?userId=${userid}`);
-    }
-   if (postorcomment === 'comments') {
-      return this.http.get(`https://jsonplaceholder.typicode.com/${postorcomment}?postId=${userid}`);
-    }
-    }
-  getStuff(userid): Observable<any> {
-        return this.http.get(`/api/users/${userid}`);
-    }
-  getHoro(libra): Observable<any> {
-      if (libra) {
-        return this.http.get('/api/libra');
-      }
-      else {
-        return this.http.get('/api/not-libra');
-      }
-    }
+  getNews(...infoValues): Observable<any> {
+  return this.http.get(`/api/rating/${infoValues[2]}/forbes`);
+}
+
+
 
 }

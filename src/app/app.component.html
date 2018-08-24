@@ -1,139 +1,56 @@
-<!--The content below is only a placeholder and can be replaced.-->
 <div class="container">
-    <form [formGroup]="registerForm" (ngSubmit)="tupleFunction()">
-  <select class="form-control" name="q1" formControlName="q1" >
-    <option value="" selected disabled>Posts or Comments</option>
-    <option value="posts">Posts</option>
-    <option value= "comments">Comments</option>
-  </select>
-  <select class="form-control" name="q2" formControlName="q2">
-      <option value="" selected disabled>User Id?</option>
-      <option value="1">1</option>
-      <option value="2">2</option>
-      <option value="3">3</option>
-      <option value="4">4</option>
-      <!-- <option value= "false">No</option> -->
-    </select>
-    <select class="form-control" name="q3" formControlName="q3">
-        <option value="" selected disabled>Over 18?</option>
-        <option [value]="true">Yes</option>
-        <option [value]= "false">No</option>
+
+  <div class="jumbotron" *ngIf="!post">
+    <h1 class="display-4">Compare Cars!</h1>
+    <p class="lead">Pick your cars and find their rating based on your selected sources.</p>
+    <hr class="my-4">
+    <form>
+      <select class="form-control" multiple (change)="onCar($event)">
+        <option *ngFor="let v of cars" #target [value]='v'>{{v}}</option>
       </select>
-      <select class="form-control" name="q4" formControlName="q4" >
-          <option value="" selected disabled>Libra</option>
-          <option [value]="true">Yes</option>
-          <option [value]= "false">No</option>
-        </select>
-      <!-- <select class="form-control" name="q4" formControlName="q4" >
-          <option value="" selected disabled>How much can you put down?</option>
-          <option value="1,000-5,000">$1,000-5,000</option>
-          <option value= "5,000-1,0000">$5,000-10,000</option>
-          <option value= "10,000-15,000">$10,000-15,000</option>
-        </select> -->
-        <button type="submit"> send</button>
-        </form>
-        
-</div>
-<!-- <div *ngIf="youngMan">
-  {{canView}}
-</div>
-<div *ngIf="showNow">{{
-  }}
-
-  <span class="first-name">{{nameInfo}}:</span> -->
-    <!-- <span class="horoscope">{{horo.horo}} </span>  -->
-    <select multiple (change)="onBand($event)">
-        <option *ngFor="let v of cars" [value]='v'>{{v}}</option>
-    </select>
-    <select multiple (change)="onChange($event)">
+      <select class="form-control" multiple (change)="onNews($event)">
         <option *ngFor="let v of topix" [value]='v'>{{v}}</option>
-    </select>
-    <!-- <select multiple (change)="onSubject($event)">
-        <option *ngFor="let v of decade" [value]='v'>{{v}}</option>
-    </select> -->
-      <hr>
-      <div *ngIf="maybe">
-          <p *ngFor="let h of horo"> {{h}} </p>
-      </div>
-      <div *ngIf="maybeCar">
-          <p *ngFor="let w of carPicked"> {{w}} </p>
-      </div>
-      <!-- [""0""].forbes.rating -->
-     <button (click)="tupleFunction()">PPPPRRREEESSSSS</button>
-  <div *ngIf="decadePicked.length > 1">
-      <!-- [""0""].forbes.rating -->
-      <!-- <div *ngFor="let d of carInfo; index as i"> -->
-          <!-- {{dataHolder[i]}} -
-      
-   <ul>>
-     <!-- <ul> -->
-        <div *ngFor="let x of carInfo; index as i">
-          <div *ngIf="x === 'Honda'">
-              HONDA!!
-              <div *ngFor="let data of decadePicked">
-                <p *ngIf="data.car === 'Honda'">
-                  {{data.source}} {{data.rating}}
-                </p>
-              </div>
-                </div>
-              </div>
-              <div *ngFor="let x of carInfo; index as i">
-                  <div *ngIf="x === 'Toyota'">
-                      TOYOTA!!
-                      <div *ngFor="let data of decadePicked">
-                        <p *ngIf="data.car === 'Toyota'">
-                          {{data.source}} {{data.rating}}
-                        </p>
-                      </div>
-                        </div>
-                      </div>
-                      <div *ngFor="let x of carInfo; index as i">
-                          <div *ngIf="x === 'Ford'">
-                              FORD!!
-                              <div *ngFor="let data of decadePicked">
-                                <p *ngIf="data.car === 'Ford'">
-                                  {{data.source}} {{data.rating}}
-                                </p>
-                              </div>
-                                </div>
-                              </div>
-                              <div *ngFor="let x of carInfo; index as i">
-                                  <div *ngIf="x === 'Chevrolet'">
-                                      Chevrolet!!
-                                      <div *ngFor="let data of decadePicked">
-                                        <p *ngIf="data.car === 'Chevrolet'">
-                                          {{data.source}} {{data.rating}}
-                                        </p>
-                                      </div>
-                                        </div>
-                                      </div>
-     <!-- {{decadePicked[i].forbes.rating}} -->
-     <!-- {{decadePicked}} -->
-     <!-- {{rating}} -->
-     <!-- <p *ngIf="data.fox"></p> -->
-     
-    
+      </select>
 
-    <!-- <p *ngIf="data.car === 'Honda'">
-        {{data.source}} {{data.rating}}
-       </p>
-  </li> -->
-   <!-- <li><b>CNN Rating: </b>{{data.cnn.rating}} </li>
-
-   <li><b>Fox Rating: </b>{{data.fox.rating}} </li> -->
-
-   <!-- </ul> -->
-  <!-- </div> -->
-
-<!-- <div *ngIf="comment"> -->
-    <!-- <p *ngFor="let data of dataHolder">
-     <b>Comment Body: </b>{{data.body}} 
-    </p>
-  </div> -->
-  <!-- </div> -->
-  <!-- <div *ngFor="let data in dataHolder">
-      {{data.title}}
+    </form>
+    <div class="centered">
+      <button (click)="tupleFunction()" class="btn btn-primary btn-lg">Compare Now!</button>
     </div>
-    <div *ngFor="let data in dataHolder">
-        {{data.title}}
-      </div> -->
+  </div>
+
+  <hr>
+  <div class="row">
+    <div class="col" *ngIf="maybeCar">
+      <div class="card" *ngFor="let w of carPicked"> {{w}} </div>
+    </div>
+    <div class="col" *ngIf="maybe">
+      <div class="card" *ngFor="let h of newsSource"> {{h | uppercase}} </div>
+    </div>
+  </div>
+
+  <div *ngIf="carData.length > 0">
+    The highest rated car is {{highestRated}} according to
+    <span *ngFor="let c of carSource">{{c | titlecase}}- </span>
+  </div>
+  <div class="row" *ngIf="post">
+    <div class="col" *ngFor="let x of carInfo; index as i">
+      <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">{{x}}</h5>
+          <div *ngFor="let data of carData">
+            <div *ngIf="data.car === x">
+                <ul class="list-group">
+                    <li class="list-group-item list-group-item-info">  {{data.source | uppercase}}: {{data.rating}}</li>
+                  </ul>
+                  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+  <div *ngIf="post" class="spacing">
+    <div class="btn btn-primary btn-lg" (click)="compareMore()">Compare More!</div>
+  </div>
+</div>
