@@ -32,23 +32,105 @@
         </select> -->
         <button type="submit"> send</button>
         </form>
+        
 </div>
-<div *ngIf="youngMan">
+<!-- <div *ngIf="youngMan">
   {{canView}}
 </div>
-<div *ngIf="showNow">
-    <span class="first-name">{{nameInfo.first_name}}:</span><span class="horoscope">{{horo.horo}} </span> 
-  </div>
-  <div *ngIf="post">
-  <p *ngFor="let data of dataHolder">
-   <b>Post Title: </b>{{data.title}} 
-  </p>
-</div>
-<div *ngIf="comment">
-    <p *ngFor="let data of dataHolder">
+<div *ngIf="showNow">{{
+  }}
+
+  <span class="first-name">{{nameInfo}}:</span> -->
+    <!-- <span class="horoscope">{{horo.horo}} </span>  -->
+    <select multiple (change)="onBand($event)">
+        <option *ngFor="let v of cars" [value]='v'>{{v}}</option>
+    </select>
+    <select multiple (change)="onChange($event)">
+        <option *ngFor="let v of topix" [value]='v'>{{v}}</option>
+    </select>
+    <!-- <select multiple (change)="onSubject($event)">
+        <option *ngFor="let v of decade" [value]='v'>{{v}}</option>
+    </select> -->
+      <hr>
+      <div *ngIf="maybe">
+          <p *ngFor="let h of horo"> {{h}} </p>
+      </div>
+      <div *ngIf="maybeCar">
+          <p *ngFor="let w of carPicked"> {{w}} </p>
+      </div>
+      <!-- [""0""].forbes.rating -->
+     <button (click)="tupleFunction()">PPPPRRREEESSSSS</button>
+  <div *ngIf="decadePicked.length > 1">
+      <!-- [""0""].forbes.rating -->
+      <!-- <div *ngFor="let d of carInfo; index as i"> -->
+          <!-- {{dataHolder[i]}} -
+      
+   <ul>>
+     <!-- <ul> -->
+        <div *ngFor="let x of carInfo; index as i">
+          <div *ngIf="x === 'Honda'">
+              HONDA!!
+              <div *ngFor="let data of decadePicked">
+                <p *ngIf="data.car === 'Honda'">
+                  {{data.source}} {{data.rating}}
+                </p>
+              </div>
+                </div>
+              </div>
+              <div *ngFor="let x of carInfo; index as i">
+                  <div *ngIf="x === 'Toyota'">
+                      TOYOTA!!
+                      <div *ngFor="let data of decadePicked">
+                        <p *ngIf="data.car === 'Toyota'">
+                          {{data.source}} {{data.rating}}
+                        </p>
+                      </div>
+                        </div>
+                      </div>
+                      <div *ngFor="let x of carInfo; index as i">
+                          <div *ngIf="x === 'Ford'">
+                              FORD!!
+                              <div *ngFor="let data of decadePicked">
+                                <p *ngIf="data.car === 'Ford'">
+                                  {{data.source}} {{data.rating}}
+                                </p>
+                              </div>
+                                </div>
+                              </div>
+                              <div *ngFor="let x of carInfo; index as i">
+                                  <div *ngIf="x === 'Chevrolet'">
+                                      Chevrolet!!
+                                      <div *ngFor="let data of decadePicked">
+                                        <p *ngIf="data.car === 'Chevrolet'">
+                                          {{data.source}} {{data.rating}}
+                                        </p>
+                                      </div>
+                                        </div>
+                                      </div>
+     <!-- {{decadePicked[i].forbes.rating}} -->
+     <!-- {{decadePicked}} -->
+     <!-- {{rating}} -->
+     <!-- <p *ngIf="data.fox"></p> -->
+     
+    
+
+    <!-- <p *ngIf="data.car === 'Honda'">
+        {{data.source}} {{data.rating}}
+       </p>
+  </li> -->
+   <!-- <li><b>CNN Rating: </b>{{data.cnn.rating}} </li>
+
+   <li><b>Fox Rating: </b>{{data.fox.rating}} </li> -->
+
+   <!-- </ul> -->
+  <!-- </div> -->
+
+<!-- <div *ngIf="comment"> -->
+    <!-- <p *ngFor="let data of dataHolder">
      <b>Comment Body: </b>{{data.body}} 
     </p>
-  </div>
+  </div> -->
+  <!-- </div> -->
   <!-- <div *ngFor="let data in dataHolder">
       {{data.title}}
     </div>

@@ -10,6 +10,96 @@ app.use(morgan('dev'));
 // app.get('/', (req, res) => {
 //     res.sendfile(path.join(__dirname))
 // })
+app.get('/api/news/:news/:year', (req, res) => {
+    console.log(req.params.news);
+    console.log(req.params.year);
+});
+app.get('/api/rating/:car/:source', (req, res) => {
+    console.log(req.params);
+    if (req.params.car === 'Honda' ) {
+        if (req.params.source === 'cnn') {
+            res.send({car: req.params.car,
+                source: 'cnn',
+                rating: 9
+                });
+                // {cnn: {rating: 6);
+        }
+        if (req.params.source === 'fox') {
+            res.send({car: req.params.car,
+                source: 'fox',
+                rating: 8
+                });
+        }
+        if (req.params.source === 'forbes') {
+            res.send({car: req.params.car,
+                source: 'forbes',
+                rating: 4
+                });
+        }
+        // res.send({car: 'akbashdbdbha'});
+    }
+    if (req.params.car === 'Toyota' ) {
+        if (req.params.source === 'cnn') {
+            res.send({car: req.params.car,
+                source: 'cnn',
+                rating: 8
+                });
+        }
+        if (req.params.source === 'fox') {
+            res.send({car: req.params.car,
+                source: 'fox',
+                rating: 6
+                });
+        }
+        if (req.params.source === 'forbes') {
+            res.send({car: req.params.car,
+                source: 'forbes',
+                rating: 9
+                });
+        }
+    }
+    if (req.params.car === 'Chevrolet' ) {
+        if (req.params.source === 'cnn') {
+            res.send({car: req.params.car,
+                source: 'cnn',
+                rating: 3
+                });
+        }
+        if (req.params.source === 'fox') {
+            res.send({car: req.params.car,
+                source: 'fox',
+                rating: 5
+                });
+        }
+        if (req.params.source === 'forbes') {
+            res.send({car: req.params.car,
+                source: 'forbes',
+                rating: 7
+                });
+        }
+    }
+    if (req.params.car === 'Ford' ) {
+        if (req.params.source === 'cnn') {
+            res.send({car: req.params.car,
+                source: 'cnn',
+                rating: 9
+                });
+        }
+        if (req.params.source === 'fox') {
+            res.send({car: req.params.car,
+                source: 'fox',
+                rating: 8
+                });
+        }
+        if (req.params.source === 'forbes') {
+            res.send({car: req.params.car,
+                source: 'forbes',
+                rating: 7
+                });
+        }
+    }
+
+});
 app.get('/api/libra', (req, res) => {
     res.send({horo: ' LIBRAS are the best, arent we!!!!'});
 });
