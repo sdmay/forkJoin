@@ -20,14 +20,14 @@ app.get('/api/rating/:car/:source', (req, res) => {
         if (req.params.source === 'cnn') {
             res.send({car: req.params.car,
                 source: 'cnn',
-                rating: 9
+                rating: 6
                 });
                 // {cnn: {rating: 6);
         }
         if (req.params.source === 'fox') {
             res.send({car: req.params.car,
                 source: 'fox',
-                rating: 8
+                rating: 7
                 });
         }
         if (req.params.source === 'forbes') {
@@ -62,19 +62,19 @@ app.get('/api/rating/:car/:source', (req, res) => {
         if (req.params.source === 'cnn') {
             res.send({car: req.params.car,
                 source: 'cnn',
-                rating: 3000
+                rating: 5
                 });
         }
         if (req.params.source === 'fox') {
             res.send({car: req.params.car,
                 source: 'fox',
-                rating: 8000
+                rating: 7
                 });
         }
         if (req.params.source === 'forbes') {
             res.send({car: req.params.car,
                 source: 'forbes',
-                rating: 7
+                rating: 8
                 });
         }
     }
@@ -88,13 +88,13 @@ app.get('/api/rating/:car/:source', (req, res) => {
         if (req.params.source === 'fox') {
             res.send({car: req.params.car,
                 source: 'fox',
-                rating: 8
+                rating: 9
                 });
         }
         if (req.params.source === 'forbes') {
             res.send({car: req.params.car,
                 source: 'forbes',
-                rating: 7
+                rating: 6
                 });
         }
     }

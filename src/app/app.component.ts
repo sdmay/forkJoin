@@ -15,6 +15,7 @@ export class AppComponent {
   carPicked = [];
   carInfo;
   rating = [];
+  carTopRating = [];
   maybe = this.newsSource.length < 0 ? false : true;
   maybeCar = this.carPicked.length < 0 ? false : true;
   totalRating = {};
@@ -26,16 +27,17 @@ export class AppComponent {
   highestRated;
   constructor(private forkService: ForkService) { }
 
-  onNews(e: HTMLInputElement) {
-    // this.newsSource.push(e.target.value);
+  onNews(e) {
+    this.newsSource.push(e.target.value);
   }
-  onCar(e: HTMLInputElement) {
-    // this.carPicked.push(e.target.value);
+  onCar(e) {
+    this.carPicked.push(e.target.value);
   }
   tupleFunction() {
     this.getTuple([[...this.carPicked], [...this.newsSource]]);
   }
   getTuple(...args): void {
+
     this.forkService.combineInfo(args).subscribe(data => {
       for (let i = 0; i < data.length; i++) {
         this.carData.push(data[i]);
@@ -48,25 +50,29 @@ export class AppComponent {
       if (this.carInfo.size > 0) {
         this.myArr = Array.from(this.carInfo);
       }
+      const divide = this.carData.length / this.myArr.length;
       for (let c = 0; c < this.myArr.length; c++) {
+        let x = 0;
         for (let d = 0; d < this.carData.length; d++) {
-          let x = [];
           if (this.myArr[c] === this.carData[d].car) {
-            x.push(this.carData[d].rating);
-            const y = x.reduce((a, b) => a + b, 0);
-            const math = y + this.carData[d].rating / d;
-
-            this.totalRating[this.myArr[c]] = math;
-            if (x.length > 0) {
-              const carVals = Object.values(this.totalRating);
-              const carKeys = Object.keys(this.totalRating);
-              const ded = carVals.indexOf(Math.max(...carVals));
-              this.highestRated = carKeys[ded];
+              x += this.carData[d].rating;
             }
           }
-          x = [];
+          this.totalRating[this.myArr[c]] = x / divide;
+      }
+      const carVals = Object.values(this.totalRating);
+      const carKeys = Object.keys(this.totalRating);
+      for (let r = 0; r < carVals.length; r++) {
+            this.carTopRating.push(carVals[r]);
+      }
+      let max = 0;
+      for (let z = 0; z < this.carTopRating.length; z++) {
+        if (this.carTopRating[z] > max) {
+          max = this.carTopRating[z];
         }
       }
+      const zippy = this.carTopRating.indexOf(max);
+      this.highestRated = carKeys[zippy];
       this.newsSource = [];
       this.carPicked = [];
     });
@@ -80,7 +86,7 @@ export class AppComponent {
     this.myArr = [];
     this.carSource = [];
     this.carInfo = [];
-    console.log('car data', this.carData);
+    this.carTopRating = [];
     }
 }
 

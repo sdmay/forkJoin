@@ -5,11 +5,13 @@
     <p class="lead">Pick your cars and find their rating based on your selected sources.</p>
     <hr class="my-4">
     <form>
+      <label>Select Car Brands</label>
       <select class="form-control" multiple (change)="onCar($event)">
         <option *ngFor="let v of cars" #target [value]='v'>{{v}}</option>
       </select>
+      <label>Select News Sources</label>
       <select class="form-control" multiple (change)="onNews($event)">
-        <option *ngFor="let v of topix" [value]='v'>{{v}}</option>
+        <option *ngFor="let v of topix" [value]='v'>{{v | uppercase}}</option>
       </select>
 
     </form>
