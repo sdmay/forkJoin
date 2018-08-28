@@ -1,14 +1,5 @@
-.first-name {
-    color: red;
-    font-size: 25px;
-}
-.post-title {
-    color: blue;
-    font-size: 16px;
-}
-.newsSourcescope {
-    color: green;
-    font-size: 14px;
+.button-color {
+    background-color: #b33535;
 }
 .centered {
     margin-top: 20px;
@@ -16,4 +7,28 @@
 }
 .spacing {
     margin-top: 40px;
+}
+.jumbotron {
+    margin-top: 30px;
+}
+.highest {
+    font-size: 18px;
+}
+.spaced {
+    margin-top: 20px;
+}
+.highest-rated {
+    font-weight: bolder;
+}
+.cnn {
+    background-color:   burlywood;
+}
+.forbes {
+    background-color: wheat;
+}
+.fox { 
+    background-color: thistle;
+}
+.car {
+    background-color: rosybrown;
 }

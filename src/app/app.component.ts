@@ -8,24 +8,22 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  dataHolder = [];
-  newsSource = [];
-  carData = [];
+  dataHolder: Array<string> = [];
+  newsSource: Array<string> = [];
+  carData: { car: string, source: string, rating: number }[] = [];
   post = false;
-  carPicked = [];
-  carInfo;
-  rating = [];
-  carTopRating = [];
-  maybe = this.newsSource.length < 0 ? false : true;
+  carPicked: Array<string> = [];
+  carTopRating: Array<any> = [];
+  maybeNews = this.newsSource.length < 0 ? false : true;
   maybeCar = this.carPicked.length < 0 ? false : true;
-  totalRating = {};
-  cars = ['Ford', 'Chevrolet', 'Honda', 'Toyota'];
-  topix = ['cnn', 'fox', 'forbes', 'car'];
-  carRating;
-  carSource;
-  myArr = [];
-  highestRated;
-  history = false;
+  totalRating: Object = {};
+  cars: ReadonlyArray<string> = ['Ford', 'Chevrolet', 'Honda', 'Toyota'];
+  topics: ReadonlyArray<string> = ['cnn', 'fox', 'forbes', 'car'];
+  carSource: Array<string>;
+  myArr: Array<string> = [];
+  highestRated: string;
+  carInfo;
+
   constructor(private forkService: ForkService) { }
 
   onNews(e) {
@@ -44,18 +42,14 @@ export class AppComponent {
       this.carPicked.push(e.target.value);
     }
   }
-  onHistory(e) {
-    this.history = !this.history;
-  }
   carReview() {
-    this.getCarReviews([[...this.carPicked], [...this.newsSource], this.history]);
+    this.getCarReviews(this.carPicked, this.newsSource);
   }
-  getCarReviews(...args): void {
+  getCarReviews(cars: Array<string>, sources: Array<string>): void {
 
-    this.forkService.combineInfo(args).subscribe(data => {
+    this.forkService.combineInfo(cars, sources).subscribe(data => {
       for (let i = 0; i < data.length; i++) {
         this.carData.push(data[i]);
-        this.rating.push(data[i].rating);
         this.dataHolder.push(data[i].car);
       }
       this.carInfo = new Set([...this.dataHolder]);
@@ -101,7 +95,6 @@ export class AppComponent {
     this.carSource = [];
     this.carInfo = [];
     this.carTopRating = [];
-    this.history = false;
   }
 }
 

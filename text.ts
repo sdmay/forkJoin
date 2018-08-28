@@ -291,3 +291,7 @@ getNews(...x): Observable<any> {
   <!-- <span class="newsSourcescope">{{newsSource.newsSource}} </span>  -->
 
 
+  <!-- <label class="radio-inline">
+  <input type="radio" [value]="history" (change)="onHistory($event)"> Include Historical Records
+</label> -->
+
