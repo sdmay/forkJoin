@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { forkJoin } from 'rxjs/observable/forkJoin';
-import 'rxjs/add/operator/map';
 
 @Injectable()
 
@@ -13,15 +12,15 @@ export class ForkService {
     const carTypes: Array<string> = brands;
     const source: Array<string> = news;
     const together: Array<string> = [];
+    const allInfo: Array<any> = [];
     for (let i = 0; i < carTypes.length; i++) {
       for (let j = 0; j < source.length; j++) {
         together.push(`/api/rating/${carTypes[i]}/${source[j]}`);
       }
     }
-    const singleObservables = together.map((singleUrl: string, urlIndexInfoValues: number) => {
-      return this.http.get(singleUrl)
-        .map(res => res);
-    });
-    return forkJoin(singleObservables);
+      for (let k = 0; k < together.length; k++) {
+        allInfo.push(this.http.get(together[k]));
+      }
+      return forkJoin(allInfo);
   }
 }

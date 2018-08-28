@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { ForkService } from './fork.service';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -11,17 +10,15 @@ export class AppComponent {
   dataHolder: Array<string> = [];
   newsSource: Array<string> = [];
   carData: { car: string, source: string, rating: number }[] = [];
-  post = false;
   carPicked: Array<string> = [];
   carTopRating: Array<any> = [];
-  maybeNews = this.newsSource.length < 0 ? false : true;
-  maybeCar = this.carPicked.length < 0 ? false : true;
   totalRating: Object = {};
   cars: ReadonlyArray<string> = ['Ford', 'Chevrolet', 'Honda', 'Toyota'];
-  topics: ReadonlyArray<string> = ['cnn', 'fox', 'forbes', 'car'];
+  sources: ReadonlyArray<string> = ['cnn', 'fox', 'forbes', 'car'];
   carSource: Array<string>;
-  myArr: Array<string> = [];
+  carNames: Array<string> = [];
   highestRated: string;
+  result = false;
   carInfo;
 
   constructor(private forkService: ForkService) { }
@@ -29,16 +26,14 @@ export class AppComponent {
   onNews(e) {
     if (this.newsSource.includes(e.target.value)) {
       this.newsSource = this.newsSource.filter(word => word !== e.target.value);
-    }
-    else {
+    } else {
       this.newsSource.push(e.target.value);
     }
   }
   onCar(e) {
     if (this.carPicked.includes(e.target.value)) {
       this.carPicked = this.carPicked.filter(word => word !== e.target.value);
-    }
-    else {
+    } else {
       this.carPicked.push(e.target.value);
     }
   }
@@ -52,21 +47,20 @@ export class AppComponent {
         this.carData.push(data[i]);
         this.dataHolder.push(data[i].car);
       }
-      this.carInfo = new Set([...this.dataHolder]);
-      this.carSource = [...this.newsSource];
-      this.post = true;
+      this.carInfo = new Set(this.dataHolder);
+      this.carSource = this.newsSource;
       if (this.carInfo.size > 0) {
-        this.myArr = Array.from(this.carInfo);
+        this.carNames = Array.from(this.carInfo);
       }
-      const divide = this.carData.length / this.myArr.length;
-      for (let c = 0; c < this.myArr.length; c++) {
+      const divide = this.carData.length / this.carNames.length;
+      for (let c = 0; c < this.carNames.length; c++) {
         let x = 0;
         for (let d = 0; d < this.carData.length; d++) {
-          if (this.myArr[c] === this.carData[d].car) {
+          if (this.carNames[c] === this.carData[d].car) {
             x += this.carData[d].rating;
           }
         }
-        this.totalRating[this.myArr[c]] = x / divide;
+        this.totalRating[this.carNames[c]] = x / divide;
       }
       const carVals = Object.values(this.totalRating);
       const carKeys = Object.keys(this.totalRating);
@@ -75,23 +69,25 @@ export class AppComponent {
       }
       let max = 0;
       for (let z = 0; z < this.carTopRating.length; z++) {
+        // TO DO: ADD A CATCH FOR TIE SCORES
         if (this.carTopRating[z] > max) {
           max = this.carTopRating[z];
         }
       }
-      const zippy = this.carTopRating.indexOf(max);
-      this.highestRated = carKeys[zippy];
+      const maxCarRating = this.carTopRating.indexOf(max);
+      this.highestRated = carKeys[maxCarRating];
       this.newsSource = [];
       this.carPicked = [];
+      this.result = true;
     });
   }
   compareMore() {
-    this.post = false;
+    this.result = false;
     this.dataHolder = [];
     this.highestRated = '';
     this.carData = [];
     this.totalRating = {};
-    this.myArr = [];
+    this.carNames = [];
     this.carSource = [];
     this.carInfo = [];
     this.carTopRating = [];

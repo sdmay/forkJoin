@@ -1,31 +1,31 @@
 <div class="container">
 
-  <div class="jumbotron" *ngIf="!post">
+  <div class="jumbotron" *ngIf="!result">
     <h1 class="display-4">Compare Cars!</h1>
     <p class="lead">Pick your cars and find their rating based on your selected sources.</p>
     <hr class="my-4">
     
     <div class="row">
-      <div class="col" *ngIf="maybeCar">
-        <div class="card" *ngFor="let car of carPicked"> {{car}} </div>
+      <div class="col">
+        <div class="card" *ngFor="let car of carPicked" class={{car}}> {{car}} </div>
       </div>
-      <div class="col" *ngIf="maybeNews">
-        <div class="card" *ngFor="let news of newsSource" > {{news | uppercase}} </div>
+      <div class="col">
+        <div class="card" *ngFor="let news of newsSource" class="{{news}}"> {{news | uppercase}} </div>
       </div>
     </div>
     <hr>
     <form>
       <label>Select Car Brands</label>
-      <select class="form-control" multiple (change)="onCar($event)">
-        <option *ngFor="let v of cars" [value]='v'>{{v}}</option>
+      <select class="form-control" multiple (click)="onCar($event)">
+        <option *ngFor="let car of cars" [value]='car'>{{car}}</option>
       </select>
       <label>Select News Sources</label>
-      <select class="form-control" multiple (change)="onNews($event)">
-        <option *ngFor="let v of topics" [value]='v'>{{v | uppercase}}</option>
+      <select class="form-control" multiple (click)="onNews($event)">
+        <option *ngFor="let source of sources" [value]='source'>{{source | uppercase}}</option>
       </select>
 </form>
     <div class="centered">
-      <button (click)="carReview()" class="btn btn-primary btn-lg button-color">Compare Now!</button>
+      <button (click)="carReview()" class="btn btn-info btn-lg">Compare Now!</button>
     </div>
   </div>
 
@@ -33,7 +33,7 @@
     <span class="highest">The highest rated car is <span class="highest-rated">{{highestRated}}</span> according to</span>
     <span *ngFor="let c of carSource" class="highest">{{c | titlecase}}- </span>
   
-  <div class="row spaced" *ngIf="post">
+  <div class="row spaced" *ngIf="result">
     <div class="col" *ngFor="let x of carInfo; index as i">
       <div class="card">
         <div class="card-body">
@@ -41,18 +41,19 @@
           <div *ngFor="let data of carData">
             <div *ngIf="data.car === x">
                 <ul class="list-group">
-                    <li class="list-group-item list-group-item-info {{data.source}}">  {{data.source | uppercase}}: {{data.rating}}</li>
-                  </ul>
-                  
+                    <li class="list-group-item 
+                    list-group-item-info 
+                    {{data.source}}">  {{data.source | uppercase}}: {{data.rating}}
+                  </li>
+                  </ul>                 
             </div>
           </div>
         </div>
       </div>
-    </div>
-    
+    </div> 
   </div>
-  <div *ngIf="post" class="spacing centered">
-    <div class="btn btn-primary btn-lg button-color" (click)="compareMore()">Compare More!</div>
+  <div *ngIf="result" class="spacing centered">
+    <div class="btn btn-info btn-lg" (click)="compareMore()">Compare More!</div>
   </div>
 </div>  
 </div>

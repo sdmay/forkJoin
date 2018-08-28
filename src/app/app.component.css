@@ -1,6 +1,3 @@
-.button-color {
-    background-color: #b33535;
-}
 .centered {
     margin-top: 20px;
     text-align: center;
@@ -31,4 +28,16 @@
 }
 .car {
     background-color: rosybrown;
+}
+.Ford {
+    background-color: lightblue;
+}
+.Chevrolet {
+    background-color: lightgreen;
+}
+.Honda {
+    background-color: lightsalmon;
+}
+.Toyota {
+    background-color: lightcyan;
 }

@@ -27,7 +27,7 @@ export class AppComponent implements OnInit {
   libra = false;
   oldEnough = false;
   showNow = false;
-  post = false;
+  result = false;
   carPicked = [];
   allOfIt;
   carInfo;
@@ -41,7 +41,7 @@ totalRating = {};
   decade = [1999, 2000, 2001, 2003];
   carRating;
   carSource;
-  myArr = [];
+  carNames = [];
   highestRated;
   constructor (private forkService: ForkService, private formBuilder: FormBuilder) {}
 
@@ -105,30 +105,30 @@ onCar(e: HTMLInputElement) {
         //       }
         // }
         console.log(this.carInfo);
-        this.post = true;
+        this.result = true;
         if (this.carInfo.size > 0) {
           // for (const item of this.carInfo.values()) {
-            this.myArr = Array.from(this.carInfo);
+            this.carNames = Array.from(this.carInfo);
             // console.log(item);
           }
-          console.log(this.myArr);
-          for (let c = 0; c < this.myArr.length; c++) {
+          console.log(this.carNames);
+          for (let c = 0; c < this.carNames.length; c++) {
             for (let d = 0; d < this.carData.length; d++) {
               const x = [];
-                          if (this.myArr[c] === this.carData[d].car) {
+                          if (this.carNames[c] === this.carData[d].car) {
                             // rating.push(this.carData[d].rating);
                             // const z = Object.keys(this.totalRating);
 
                             // console.log(x);
-                            // const x = this.totalRating[this.myArr[c]] || 0;
-                            console.log(this.myArr[c]);
+                            // const x = this.totalRating[this.carNames[c]] || 0;
+                            console.log(this.carNames[c]);
                             x.push(this.carData[d].rating);
                             const y = x.reduce((a, b) => a + b, 0);
-                            // const y = this.totalRating[this.myArr[c]];
+                            // const y = this.totalRating[this.carNames[c]];
                             console.log('ttetetete', y);
                             const math = y + this.carData[d].rating / d;
 
-                            this.totalRating[this.myArr[c]] = math;
+                            this.totalRating[this.carNames[c]] = math;
                             if (x.length > 0) {
                               const carVals = Object.values(this.totalRating);
                             const carKeys = Object.keys(this.totalRating)
@@ -201,7 +201,7 @@ together = [];
     // console.log(singleUrl);
     // });
     console.log(this.together);
-    const singleObservables = this.together.map((singleUrl: string, urlIndex: number) => {
+    const urlMap = this.together.map((singleUrl: string, urlIndex: number) => {
       return this.getSingle(singleUrl)
           .map(p => {
             console.log(p as Array<any>);
@@ -213,7 +213,7 @@ together = [];
           // });
   });
 
-  return forkJoin(singleObservables);
+  return forkJoin(urlMap);
   }
     // console.log(this.combined);
     getSingle(singleUrl: string): Observable<any> {
