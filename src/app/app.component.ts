@@ -20,23 +20,37 @@ export class AppComponent {
   maybeCar = this.carPicked.length < 0 ? false : true;
   totalRating = {};
   cars = ['Ford', 'Chevrolet', 'Honda', 'Toyota'];
-  topix = ['cnn', 'fox', 'forbes'];
+  topix = ['cnn', 'fox', 'forbes', 'car'];
   carRating;
   carSource;
   myArr = [];
   highestRated;
+  history = false;
   constructor(private forkService: ForkService) { }
 
   onNews(e) {
-    this.newsSource.push(e.target.value);
+    if (this.newsSource.includes(e.target.value)) {
+      this.newsSource = this.newsSource.filter(word => word !== e.target.value);
+    }
+    else {
+      this.newsSource.push(e.target.value);
+    }
   }
   onCar(e) {
-    this.carPicked.push(e.target.value);
+    if (this.carPicked.includes(e.target.value)) {
+      this.carPicked = this.carPicked.filter(word => word !== e.target.value);
+    }
+    else {
+      this.carPicked.push(e.target.value);
+    }
   }
-  tupleFunction() {
-    this.getTuple([[...this.carPicked], [...this.newsSource]]);
+  onHistory(e) {
+    this.history = !this.history;
   }
-  getTuple(...args): void {
+  carReview() {
+    this.getCarReviews([[...this.carPicked], [...this.newsSource], this.history]);
+  }
+  getCarReviews(...args): void {
 
     this.forkService.combineInfo(args).subscribe(data => {
       for (let i = 0; i < data.length; i++) {
@@ -55,15 +69,15 @@ export class AppComponent {
         let x = 0;
         for (let d = 0; d < this.carData.length; d++) {
           if (this.myArr[c] === this.carData[d].car) {
-              x += this.carData[d].rating;
-            }
+            x += this.carData[d].rating;
           }
-          this.totalRating[this.myArr[c]] = x / divide;
+        }
+        this.totalRating[this.myArr[c]] = x / divide;
       }
       const carVals = Object.values(this.totalRating);
       const carKeys = Object.keys(this.totalRating);
       for (let r = 0; r < carVals.length; r++) {
-            this.carTopRating.push(carVals[r]);
+        this.carTopRating.push(carVals[r]);
       }
       let max = 0;
       for (let z = 0; z < this.carTopRating.length; z++) {
@@ -87,6 +101,7 @@ export class AppComponent {
     this.carSource = [];
     this.carInfo = [];
     this.carTopRating = [];
-    }
+    this.history = false;
+  }
 }
 

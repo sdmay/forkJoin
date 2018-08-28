@@ -4,6 +4,16 @@
     <h1 class="display-4">Compare Cars!</h1>
     <p class="lead">Pick your cars and find their rating based on your selected sources.</p>
     <hr class="my-4">
+    
+    <div class="row">
+      <div class="col" *ngIf="maybeCar">
+        <div class="card" *ngFor="let w of carPicked"> {{w}} </div>
+      </div>
+      <div class="col" *ngIf="maybe">
+        <div class="card" *ngFor="let h of newsSource"> {{h | uppercase}} </div>
+      </div>
+    </div>
+    <hr>
     <form>
       <label>Select Car Brands</label>
       <select class="form-control" multiple (change)="onCar($event)">
@@ -13,27 +23,21 @@
       <select class="form-control" multiple (change)="onNews($event)">
         <option *ngFor="let v of topix" [value]='v'>{{v | uppercase}}</option>
       </select>
-
+      <label class="radio-inline">
+          <input type="radio" [value]="history" (change)="onHistory($event)"> Include Historical Records
+        </label>
+        
     </form>
     <div class="centered">
-      <button (click)="tupleFunction()" class="btn btn-primary btn-lg">Compare Now!</button>
+      <button (click)="carReview()" class="btn btn-primary btn-lg">Compare Now!</button>
     </div>
   </div>
 
-  <hr>
-  <div class="row">
-    <div class="col" *ngIf="maybeCar">
-      <div class="card" *ngFor="let w of carPicked"> {{w}} </div>
-    </div>
-    <div class="col" *ngIf="maybe">
-      <div class="card" *ngFor="let h of newsSource"> {{h | uppercase}} </div>
-    </div>
-  </div>
-
-  <div *ngIf="carData.length > 0">
+  <div class="jumbotron" *ngIf="carData.length > 0">
+    <div *ngIf="history">Historical Records Included</div>
     The highest rated car is {{highestRated}} according to
     <span *ngFor="let c of carSource">{{c | titlecase}}- </span>
-  </div>
+  
   <div class="row" *ngIf="post">
     <div class="col" *ngFor="let x of carInfo; index as i">
       <div class="card">
@@ -52,7 +56,8 @@
     </div>
     
   </div>
-  <div *ngIf="post" class="spacing">
+  <div *ngIf="post" class="spacing centered">
     <div class="btn btn-primary btn-lg" (click)="compareMore()">Compare More!</div>
   </div>
+</div>  
 </div>

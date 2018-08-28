@@ -14,6 +14,15 @@ app.get('/api/news/:news/:year', (req, res) => {
     console.log(req.params.news);
     console.log(req.params.year);
 });
+// app.get('/api/cats/:name', (req, res) => {
+//         console.log(req.params);
+//         if (req.params.name === 'opie') {
+//             res.send('He is getting big');
+//         }
+//         else {
+//             res.send('They do not matter');
+//         }
+// });
 app.get('/api/rating/:car/:source', (req, res) => {
     console.log(req.params);
     if (req.params.car === 'Honda' ) {
@@ -21,6 +30,13 @@ app.get('/api/rating/:car/:source', (req, res) => {
             res.send({car: req.params.car,
                 source: 'cnn',
                 rating: 6
+                });
+                // {cnn: {rating: 6);
+        }
+        if (req.params.source === 'car') {
+            res.send({car: req.params.car,
+                source: 'car',
+                rating: 9
                 });
                 // {cnn: {rating: 6);
         }
@@ -45,6 +61,13 @@ app.get('/api/rating/:car/:source', (req, res) => {
                 rating: 8
                 });
         }
+        if (req.params.source === 'car') {
+            res.send({car: req.params.car,
+                source: 'car',
+                rating: 7
+                });
+                // {cnn: {rating: 6);
+        }
         if (req.params.source === 'fox') {
             res.send({car: req.params.car,
                 source: 'fox',
@@ -65,6 +88,13 @@ app.get('/api/rating/:car/:source', (req, res) => {
                 rating: 5
                 });
         }
+        if (req.params.source === 'car') {
+            res.send({car: req.params.car,
+                source: 'car',
+                rating: 6
+                });
+                // {cnn: {rating: 6);
+        }
         if (req.params.source === 'fox') {
             res.send({car: req.params.car,
                 source: 'fox',
@@ -84,6 +114,13 @@ app.get('/api/rating/:car/:source', (req, res) => {
                 source: 'cnn',
                 rating: 9
                 });
+        }
+        if (req.params.source === 'car') {
+            res.send({car: req.params.car,
+                source: 'car',
+                rating: 5
+                });
+                // {cnn: {rating: 6);
         }
         if (req.params.source === 'fox') {
             res.send({car: req.params.car,
