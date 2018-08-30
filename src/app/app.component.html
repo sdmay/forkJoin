@@ -14,9 +14,6 @@
       </div>
     </div>
     <hr>
-    <form>
-
-
         <label>Enter your gender</label>
         <select class="form-control" (click)="onGender($event)">
             <option value='male'>Male</option>
@@ -35,7 +32,7 @@
       <select class="form-control" multiple (click)="onNews($event)">
         <option *ngFor="let source of sources" [value]='source'>{{source | uppercase}}</option>
       </select>
-</form>
+
     <div class="centered">
       <button (click)="carReview()" class="btn btn-info btn-lg">Compare Now!</button>
     </div>
