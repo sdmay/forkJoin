@@ -5,6 +5,8 @@ import * as morgan from 'morgan';
 
 const app = express();
 app.use(morgan('dev'));
+app.use(bodyParser.json()); // support json encoded bodies
+app.use(bodyParser.urlencoded({ extended: true }));
 // app.set('port', process.env.PORT || 3000);
 
 // app.get('/', (req, res) => {
@@ -13,6 +15,10 @@ app.use(morgan('dev'));
 app.get('/api/news/:news/:year', (req, res) => {
     console.log(req.params.news);
     console.log(req.params.year);
+});
+app.post('/api/user', (req, res) => {
+    console.log(req.body);
+    res.send(req.body);
 });
 // app.get('/api/cats/:name', (req, res) => {
 //         console.log(req.params);

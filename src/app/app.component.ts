@@ -18,6 +18,9 @@ export class AppComponent {
   carSource: Array<string>;
   carNames: Array<string> = [];
   highestRated: string;
+  name: string;
+  age: boolean;
+  gendered: string;
   result = false;
   carInfo;
 
@@ -37,15 +40,30 @@ export class AppComponent {
       this.carPicked.push(e.target.value);
     }
   }
-  carReview() {
-    this.getCarReviews(this.carPicked, this.newsSource);
+  onAge(e) {
+    console.log(e.target.value);
+    if (e.target.value === 'yes') {
+      this.age = true;
+    } else {
+      this.age = false;
+    }
   }
-  getCarReviews(cars: Array<string>, sources: Array<string>): void {
+  onGender(e) {
+    this.gendered = e.target.value;
+  }
+  carReview() {
+    this.getCarReviews(this.carPicked, this.newsSource, this.age, this.gendered);
+  }
+  getCarReviews(cars: Array<string>, sources: Array<string>, age: boolean, gender: string): void {
 
-    this.forkService.combineInfo(cars, sources).subscribe(data => {
+    const args: [boolean, string] = [age, gender];
+    this.forkService.combineInfo(cars, sources, ...args).subscribe(data => {
       for (let i = 0; i < data.length; i++) {
-        this.carData.push(data[i]);
-        this.dataHolder.push(data[i].car);
+        if (data[i].gender) {
+        } else {
+          this.carData.push(data[i]);
+          this.dataHolder.push(data[i].car);
+        }
       }
       this.carInfo = new Set(this.dataHolder);
       this.carSource = this.newsSource;
@@ -91,6 +109,7 @@ export class AppComponent {
     this.carSource = [];
     this.carInfo = [];
     this.carTopRating = [];
+    this.name = '';
   }
 }
 

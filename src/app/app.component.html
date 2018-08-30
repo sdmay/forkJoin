@@ -1,5 +1,5 @@
 <div class="container">
-
+{{name}}
   <div class="jumbotron" *ngIf="!result">
     <h1 class="display-4">Compare Cars!</h1>
     <p class="lead">Pick your cars and find their rating based on your selected sources.</p>
@@ -15,6 +15,18 @@
     </div>
     <hr>
     <form>
+
+
+        <label>Enter your gender</label>
+        <select class="form-control" (click)="onGender($event)">
+            <option value='male'>Male</option>
+            <option value='female'>Female</option>
+          </select>
+      <label>Are you over 18?</label>
+      <select class="form-control" (click)="onAge($event)">
+          <option value='yes'>Yes</option>
+          <option value='no'>No</option>
+        </select>
       <label>Select Car Brands</label>
       <select class="form-control" multiple (click)="onCar($event)">
         <option *ngFor="let car of cars" [value]='car'>{{car}}</option>

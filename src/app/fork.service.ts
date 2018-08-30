@@ -8,9 +8,13 @@ import { forkJoin } from 'rxjs/observable/forkJoin';
 export class ForkService {
 
   constructor(private http: HttpClient) { }
-  combineInfo(brands: Array<string>, news: Array<string>): Observable<Array<any>> {
+  combineInfo(brands: Array<string>, news: Array<string>, ...args: [boolean, string]): Observable<Array<any>> {
     const carTypes: Array<string> = brands;
     const source: Array<string> = news;
+    const user = {
+      oldEnough: args[0],
+      gender: args[1]
+    };
     const together: Array<string> = [];
     const allInfo: Array<any> = [];
     for (let i = 0; i < carTypes.length; i++) {
@@ -21,6 +25,7 @@ export class ForkService {
       for (let k = 0; k < together.length; k++) {
         allInfo.push(this.http.get(together[k]));
       }
+      allInfo.push(this.http.post('/api/user', user));
       return forkJoin(allInfo);
   }
 }
