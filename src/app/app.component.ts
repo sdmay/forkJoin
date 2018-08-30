@@ -41,7 +41,6 @@ export class AppComponent {
     }
   }
   onAge(e) {
-    console.log(e.target.value);
     if (e.target.value === 'yes') {
       this.age = true;
     } else {
@@ -55,11 +54,11 @@ export class AppComponent {
     this.getCarReviews(this.carPicked, this.newsSource, this.age, this.gendered);
   }
   getCarReviews(cars: Array<string>, sources: Array<string>, age: boolean, gender: string): void {
-
-    const args: [boolean, string] = [age, gender];
-    this.forkService.combineInfo(cars, sources, ...args).subscribe(data => {
+    const userInfo: [boolean, string] = [age, gender];
+    this.forkService.combineInfo(cars, sources, ...userInfo).subscribe(data => {
       for (let i = 0; i < data.length; i++) {
         if (data[i].gender) {
+          console.log('User Saved');
         } else {
           this.carData.push(data[i]);
           this.dataHolder.push(data[i].car);
