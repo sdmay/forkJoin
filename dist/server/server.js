@@ -6,7 +6,7 @@ var morgan = require("morgan");
 var app = express();
 app.use(morgan('dev'));
 app.use(express.json());
-var PORT = 3000 || process.env.PORT;
+// const PORT = app.listen();
 // app.get('/', (req, res) => {
 //     res.sendfile(path.join(__dirname))
 // })
@@ -142,8 +142,8 @@ app.get('/api/rating/:car/:source', function (req, res) {
         }
     }
 });
-app.listen(PORT, function () {
-    console.log('Listening ', PORT);
+app.listen(process.env.PORT || 3000, function () {
+    console.log('Listening ');
 });
 exports.default = app;
 //# sourceMappingURL=server.js.map
