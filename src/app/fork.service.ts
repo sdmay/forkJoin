@@ -17,14 +17,14 @@ export class ForkService {
     };
     const together: Array<string> = [];
     const allInfo: Array<any> = [];
-    for (let i = 0; i < carTypes.length; i++) {
-      for (let j = 0; j < source.length; j++) {
-        together.push(`/api/rating/${carTypes[i]}/${source[j]}`);
+    for (const ct of carTypes) {
+      for (const s of source) {
+      together.push(`/api/rating/${ct}/${s}`);
       }
     }
-      for (let k = 0; k < together.length; k++) {
-        allInfo.push(this.http.get(together[k]));
-      }
+    for (const t of together) {
+      allInfo.push(this.http.get(t));
+    }
       allInfo.push(this.http.post('/api/user', user));
       return forkJoin(allInfo);
   }

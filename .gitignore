@@ -8,6 +8,7 @@
 
 # dependencies
 /node_modules
+/server/cars
 /AppData
 # IDEs and editors
 /.idea
