@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var express = require("express");
+var path = require("path");
 var morgan = require("morgan");
 var app = express();
 app.use(morgan('dev'));
@@ -9,6 +10,11 @@ var PORT = 3000 || process.env.PORT;
 // app.get('/', (req, res) => {
 //     res.sendfile(path.join(__dirname))
 // })
+app.use('/', express.static(path.join(__dirname, '../public')));
+// app.use('/', express.static(__dirname));
+app.get('/*', function (req, res) {
+    res.sendFile(path.join(__dirname, '../index.html'));
+});
 app.post('/api/user', function (req, res) {
     console.log(req.body);
     res.send(req.body);

@@ -9,6 +9,12 @@ const PORT = 3000 || process.env.PORT;
 // app.get('/', (req, res) => {
 //     res.sendfile(path.join(__dirname))
 // })
+app.use('/', express.static(path.join(__dirname, '../public')));
+// app.use('/', express.static(__dirname));
+
+app.get('/*', function(req, res) {
+    res.sendFile(path.join(__dirname, '../index.html'));
+  });
 app.post('/api/user', (req, res) => {
     console.log(req.body);
     res.send(req.body);
