@@ -5,7 +5,7 @@ import * as morgan from 'morgan';
 const app = express();
 app.use(morgan('dev'));
 app.use(express.json());
-
+const PORT = 3000 || process.env.PORT;
 // app.get('/', (req, res) => {
 //     res.sendfile(path.join(__dirname))
 // })
@@ -136,7 +136,7 @@ app.get('/api/rating/:car/:source', (req, res) => {
         }
     }
 });
-app.listen(3000, () => {
-    console.log('Listening');
+app.listen(PORT, () => {
+    console.log('Listening ', PORT);
 });
 export default app;
