@@ -4,17 +4,17 @@ import * as morgan from 'morgan';
 
 const app = express();
 app.use(morgan('dev'));
+
+app.use('/', express.static(path.join(__dirname, '../public')));
 app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 // const PORT = app.listen();
 // app.get('/', (req, res) => {
 //     res.sendfile(path.join(__dirname))
 // })
-app.use('/', express.static(path.join(__dirname, '../public')));
+
 // app.use('/', express.static(__dirname));
 
-app.get('/*', function(req, res) {
-    res.sendFile(path.join(__dirname, '../index.html'));
-  });
 app.post('/api/user', (req, res) => {
     console.log(req.body);
     res.send(req.body);
@@ -82,6 +82,7 @@ app.get('/api/rating/:car/:source', (req, res) => {
         }
     }
     if (req.params.car === 'Chevrolet') {
+        console.log(req.params.car);
         if (req.params.source === 'cnn') {
             res.send({
                 car: req.params.car,
@@ -142,6 +143,9 @@ app.get('/api/rating/:car/:source', (req, res) => {
         }
     }
 });
+app.get('/*', function(req, res) {
+    res.sendFile(path.join(__dirname, '../public/index.html'));
+  });
 app.listen(process.env.PORT || 3000, () => {
     console.log('Listening ');
 });
